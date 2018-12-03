@@ -27,4 +27,8 @@ public class MainPresenterImpl implements MainPresenter {
     public void send(ArrayList<Interest> intereses) {
          mainView.setMessageResponse(JsonManager.printJson(intereses));
     }
+
+    public void send(String s, String s1) {
+        mainInteractor.postInterest(s,s1);
+     }
 }

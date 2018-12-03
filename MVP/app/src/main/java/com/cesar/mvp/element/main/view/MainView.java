@@ -8,4 +8,5 @@ public interface MainView {
     void setMessageResponse(String response);
     void send(View v);
 
+    void post(View v);
 }

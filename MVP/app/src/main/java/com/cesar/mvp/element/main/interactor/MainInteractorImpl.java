@@ -27,16 +27,12 @@ public class MainInteractorImpl implements MainInteractor {
         mainPresenter.send(intereses);
     }
 
-
-
-
-
-
-
-
-
-
     public MainRepositoryImpl getMainRepository() {
         return mainRepository;
+    }
+
+    public void postInterest(String s, String s1) {
+        Interest i = new Interest(s,s1);
+        mainRepository.postInterest(i);
     }
 }

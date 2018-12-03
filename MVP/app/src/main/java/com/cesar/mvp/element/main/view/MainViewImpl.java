@@ -1,5 +1,6 @@
 package com.cesar.mvp.element.main.view;
 
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,8 @@ public class MainViewImpl extends AppCompatActivity implements MainView{
     private MainPresenterImpl mainPresenter;
 
     private TextView mainViewTextTest;
+    private TextInputEditText mainViewTextIdInterest;
+    private TextInputEditText mainViewTextNameInterest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,8 @@ public class MainViewImpl extends AppCompatActivity implements MainView{
     @Override
     public void initComponents() {
         mainViewTextTest = (TextView) findViewById(R.id.mainViewTextTest);
+        mainViewTextIdInterest = (TextInputEditText) findViewById(R.id.mainViewTextIdInterest);
+        mainViewTextNameInterest = (TextInputEditText) findViewById(R.id.mainViewTextNameInterest);
     }
 
     @Override
@@ -37,6 +42,11 @@ public class MainViewImpl extends AppCompatActivity implements MainView{
     @Override
     public void send(View v){
         mainPresenter.getJson();
+    }
+
+    @Override
+    public void post(View v){
+        mainPresenter.send(mainViewTextIdInterest.getText().toString(), mainViewTextNameInterest.getText().toString());
     }
 
 }

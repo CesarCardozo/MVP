@@ -53,4 +53,22 @@ public class MainRepositoryImpl implements MainRepository {
             }
         });
     }
+
+
+    public void postInterest(Interest i) {
+        APIService mAPIService =  ApiUtils.getAPIService();
+        mAPIService.sendInterest(i).enqueue(new Callback<Interest>() {
+            @Override
+            public void onResponse(Call<Interest> call, Response<Interest> response) {
+                if (response.isSuccessful()){
+                    Log.e("tag","post submitted to API." + response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Interest> call, Throwable t) {
+                Log.e("TAG", "Error" + t.getMessage());
+            }
+        });
+    }
 }
