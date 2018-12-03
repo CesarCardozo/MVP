@@ -2,6 +2,7 @@ package com.cesar.mvp.element.main.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,7 +19,6 @@ public class MainViewImpl extends AppCompatActivity implements MainView{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mainPresenter = new MainPresenterImpl(this);
         initComponents();
 
@@ -31,7 +31,7 @@ public class MainViewImpl extends AppCompatActivity implements MainView{
 
     @Override
     public void setMessageResponse(String response) {
-
+        mainViewTextTest.setText(response);
     }
 
     @Override

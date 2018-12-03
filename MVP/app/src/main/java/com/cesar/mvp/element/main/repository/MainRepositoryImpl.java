@@ -1,14 +1,21 @@
 package com.cesar.mvp.element.main.repository;
 
+import android.app.Service;
+import android.util.Log;
+
 import com.cesar.mvp.element.main.interactor.MainInteractorImpl;
 import com.cesar.mvp.element.main.repository.petitions.APIService;
 import com.cesar.mvp.element.main.repository.petitions.ApiUtils;
+import com.cesar.mvp.element.main.repository.petitions.JsonManager;
 import com.cesar.mvp.element.main.repository.petitions.RetrofitClient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Interest;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainRepositoryImpl implements MainRepository {
 
@@ -19,10 +26,31 @@ public class MainRepositoryImpl implements MainRepository {
         this.mainInteractor = mainInteractor;
     }
 
-    public String getJson() {
+    public void getJson() {
         APIService mAPIService =  ApiUtils.getAPIService();
         Call<List<Interest>> call = mAPIService.getInterests();
+        final ArrayList<Interest> interests = new ArrayList<>();
+        call.enqueue(new Callback<List<Interest>>() {
+            @Override
+            public void onResponse(Call<List<Interest>> call, Response<List<Interest>> response) {
 
-        return "";
+                if (!response.isSuccessful()){
+                    Log.i("TAG", "Error" + response.code());
+                }else{
+                    List<Interest> post = response.body();
+                    for (Interest i : post){
+
+                        Interest interest = new Interest(i.getIdInterest(), i.getNameInterests());
+                      interests.add(interest);
+                    }
+                }
+                mainInteractor.mostrarInteres(interests);
+            }
+
+            @Override
+            public void onFailure(Call<List<Interest>> call, Throwable t) {
+                Log.e("TAG", "Error" + t.getMessage());
+            }
+        });
     }
 }

@@ -12,6 +12,11 @@ public class Interest {
     @Expose
     private String nameInterests;
 
+    public Interest(String idInterest, String nameInterests) {
+        this.idInterest = idInterest;
+        this.nameInterests = nameInterests;
+    }
+
     public String getIdInterest() {
         return idInterest;
     }
@@ -28,4 +33,11 @@ public class Interest {
         this.nameInterests = nameInterests;
     }
 
+    @Override
+    public String toString() {
+        return "Interest{" +
+                "idInterest='" + idInterest + '\'' +
+                ", nameInterests='" + nameInterests + '\'' +
+                '}';
+    }
 }

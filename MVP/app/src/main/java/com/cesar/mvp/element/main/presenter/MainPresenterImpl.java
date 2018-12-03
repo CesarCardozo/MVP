@@ -1,7 +1,14 @@
 package com.cesar.mvp.element.main.presenter;
 
+import android.util.Log;
+
 import com.cesar.mvp.element.main.interactor.MainInteractorImpl;
+import com.cesar.mvp.element.main.repository.petitions.JsonManager;
 import com.cesar.mvp.element.main.view.MainViewImpl;
+
+import java.util.ArrayList;
+
+import model.Interest;
 
 public class MainPresenterImpl implements MainPresenter {
 
@@ -14,7 +21,10 @@ public class MainPresenterImpl implements MainPresenter {
      }
 
     public void getJson() {
-         mainView.setMessageResponse(mainInteractor.getJson());
+        mainInteractor.getJson();
+    }
 
+    public void send(ArrayList<Interest> intereses) {
+         mainView.setMessageResponse(JsonManager.printJson(intereses));
     }
 }
